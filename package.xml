@@ -17,6 +17,7 @@
     <depend>ament_index_cpp</depend>
     <build_depend>python3</build_depend>
     <exec_depend>python3</exec_depend>
+    <exec_depend>rclpy</exec_depend>
 
   <depend>rclcpp</depend>
   <depend>sensor_msgs</depend>

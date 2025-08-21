@@ -37,4 +37,9 @@ ament_target_dependencies(local_learning_node
 install(TARGETS local_learning_node
   DESTINATION lib/${PROJECT_NAME})
 
+install(PROGRAMS
+  src/local_learning_node.py
+  DESTINATION lib/${PROJECT_NAME}
+)
+
 ament_package()
