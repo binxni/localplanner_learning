@@ -1,6 +1,6 @@
 from setuptools import setup
 
-package_name = 'pytorch_planner_pkg'
+package_name = 'local_learning'
 
 setup(
     name=package_name,
@@ -19,7 +19,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'pytorch_planner_node = pytorch_planner_pkg.planner_node:main',
+            'local_learning_node = local_learning.planner_node:main',
         ],
     },
 )

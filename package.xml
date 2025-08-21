@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package format="3">
-  <name>pytorch_planner_pkg</name>
+  <name>local_learning</name>
   <version>0.0.0</version>
   <description>Local planner using a PyTorch model.</description>
   <maintainer email="example@example.com">Maintainer</maintainer>

@@ -13,27 +13,28 @@ from f1tenth_planning_custom_msgs.msg import PathWithVelocity, Waypoint
 import torch
 
 
-class PytorchPlanner(Node):
+class LocalLearningPlanner(Node):
     """ROS2 node using a pre-trained PyTorch model for local planning."""
 
     def __init__(self) -> None:
-        super().__init__('pytorch_planner')
-        self.declare_parameter('model_path', '')
+        super().__init__('local_learning')
+        package_dir = Path(__file__).resolve().parent.parent
+        default_model_path = str(package_dir / 'model/mobilenet_trained_updated.pt')
+        self.declare_parameter('model_path', default_model_path)
         model_path_param = (
             self.get_parameter('model_path').get_parameter_value().string_value
         )
-        if not model_path_param:
-            self.get_logger().warn(
-                'No model_path parameter provided, planner will not run.'
-            )
-            self.model = None
-        else:
-            model_path = Path(model_path_param)
-            if not model_path.is_absolute():
-                package_dir = Path(__file__).resolve().parent.parent
-                model_path = package_dir / model_path
+        model_path = Path(model_path_param)
+        if not model_path.is_absolute():
+            model_path = package_dir / model_path
+        if model_path.exists():
             self.model = torch.jit.load(str(model_path))
             self.model.eval()
+        else:
+            self.get_logger().warn(
+                f'Model file not found at {model_path}, planner will not run.'
+            )
+            self.model = None
 
         # Synchronize LaserScan and PolarGrid messages
         self.scan_sub = Subscriber(self, LaserScan, '/scan')
@@ -95,7 +96,7 @@ class PytorchPlanner(Node):
 
 def main(args: List[str] | None = None) -> None:
     rclpy.init(args=args)
-    node = PytorchPlanner()
+    node = LocalLearningPlanner()
     rclpy.spin(node)
     rclpy.shutdown()
 
