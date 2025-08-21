@@ -1,0 +1,3 @@
+pytorch_planner:
+  ros__parameters:
+    model_path: "model/mobilenet_trained_updated.pt"
