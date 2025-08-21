@@ -2,19 +2,24 @@
 <package format="3">
   <name>local_learning</name>
   <version>0.0.0</version>
-  <description>Local planner using a PyTorch model.</description>
+  <description>Local planner using a LibTorch model.</description>
   <maintainer email="example@example.com">Maintainer</maintainer>
   <license>Apache-2.0</license>
 
   <buildtool_depend>ament_python</buildtool_depend>
+
   <depend>rclpy</depend>
   <depend>sensor_msgs</depend>
-  <depend>message_filters</depend>
   <depend>global_to_polar_cpp</depend>
   <depend>f1tenth_planning_custom_msgs</depend>
-  <exec_depend>torch</exec_depend>
+  <depend>ament_index_python</depend>
+
+  <exec_depend>python3</exec_depend>
+
+  <test_depend>pytest</test_depend>
 
   <export>
     <build_type>ament_python</build_type>
   </export>
 </package>
+
